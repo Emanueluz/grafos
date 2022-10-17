@@ -7,14 +7,15 @@ public class main <Tipo extends Comparable<Tipo>>{
 	public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        Scanner scanner2 = new Scanner(System.in);
-        Scanner scanner3 = new Scanner(System.in);
-        Scanner scanner4 = new Scanner(System.in);
+ 
 
         String matricula = "";
         int menu = 0;
 
+        LeitorArquivos leitor = new LeitorArquivos<>();
+        Grafo matriz = new Grafo<>();
 
+        Grafo a =new  LeitorArquivos.ler("C:\\Users\\x\\Desktop\\Grafos-main\\entrada.txt") ;
 
         while(menu!=99){
             System.out.println(
