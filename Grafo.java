@@ -6,7 +6,7 @@ import Grafos.Vertice.*;
 import Grafos.Aresta.*;
 
 public class Grafo<Tipo extends Comparable>{
-    private  ArrayList<ArrayList<Aresta<Tipo>>> arestas ;
+    private   ArrayList<Aresta<Tipo>>  arestas ;
     private ArrayList<Vertice<Tipo>> vertices;
     int qArestas;
     
@@ -36,6 +36,9 @@ public class Grafo<Tipo extends Comparable>{
     public int setqArestas(int A)
     {
          this.arestas=A;
+    }
+    public retornar_aresta(int linha, int coluna){
+        return this.arestas[linha][coluna];
     }
     
 }

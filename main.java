@@ -1,3 +1,4 @@
+
 package grafos;
 
 import java.util.Scanner;
@@ -13,7 +14,7 @@ public class main <Tipo extends Comparable<Tipo>>{
         int menu = 0;
 
         LeitorArquivos leitor = new LeitorArquivos<>();
-        Grafo matriz = leitor.ler("C:\\Users\\x\\Desktop\\Grafos-main\\entrada.txt") ;
+        Grafo matriz = leitor.ler("entrada.txt") ;
 
         while(menu!=99){
             System.out.println(

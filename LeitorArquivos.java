@@ -1,3 +1,6 @@
+
+
+
 package grafos;
 
     
@@ -11,7 +14,7 @@ import java.util.ArrayList;
  public class LeitorArquivos<Tipo extends Comparable<Tipo>>{
  
 
-    public Grafo ler(String string) throws IOException{
+    public Grafo<> ler(String string) throws IOException{
         Grafo matriz = new Grafo();
         
         ArrayList<Aresta> lista_de_arestas = new ArrayList<Aresta>();
@@ -38,8 +41,7 @@ import java.util.ArrayList;
 
 
         /* loop que converte matriz de arestas do arquivo txt em grafo*/
-        ArrayList<ArrayList<Aresta<Tipo>>> matriz_de_arestas = new ArrayList<ArrayList<Aresta<Tipo>>>();
-
+ 
         for (int linhas_da_matriz = 0;linhas_da_matriz <=numero_de_casos-1;linhas_da_matriz++){
             linha = buffRead.readLine();
             obj = linha.split(";");
@@ -47,19 +49,19 @@ import java.util.ArrayList;
 
             for (int coluna_da_matriz=0;coluna_da_matriz<=obj.length-1;coluna_da_matriz++){
                 Aresta aresta = new Aresta();
-                aresta.setOrigem(lista_de_Vertices[linhas_da_matriz]);
-                aresta.setDestino(lista_de_Vertices[linhas_da_matriz]);
+                aresta.setOrigem(lista_de_Vertices.get(linhas_da_matriz));
+                aresta.setDestino(lista_de_Vertices.get(linhas_da_matriz));
                 aresta.setPeso(Integer.parseInt(obj[coluna_da_matriz]));
                 lista_de_arestas.add(aresta);
             }
 
 
-            matriz_de_arestas.add(lista_de_arestas);
-            lista_de_arestas =new ArrayList<Aresta>();
+            
+             
          }
 
          
-        matriz.setarestas(matriz_de_arestas);
+        matriz.setarestas(lista_de_arestas);
         matriz.setvertices(lista_de_Vertices);
         matriz.setqArestas(numero_de_casos);
         buffRead.close();
