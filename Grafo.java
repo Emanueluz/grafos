@@ -31,11 +31,11 @@ public class Grafo<Tipo extends Comparable>{
          this.arestas=A;
     }
     public int getqArestas(){
-        return this.arestas;
+        return this.qArestas;
     }
     public int setqArestas(int A)
     {
-         this.arestas=A;
+         this.qArestas=A;
     }
     public retornar_aresta(int linha, int coluna){
         return this.arestas[linha][coluna];
