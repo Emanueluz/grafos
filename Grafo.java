@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import Grafos.Vertice.*;
 import Grafos.Aresta.*;
 
-public class Grafo<Tipo extends Comparable>{
+public class Grafo<Tipo extends Comparable<Tipo>>{
     private   ArrayList<Aresta<Tipo>>  arestas ;
     private ArrayList<Vertice<Tipo>> vertices;
     int qArestas;
