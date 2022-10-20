@@ -14,8 +14,8 @@ import java.util.ArrayList;
  public class LeitorArquivos<Tipo extends Comparable<Tipo>>{
  
 
-    public Grafo<> ler(String string) throws IOException{
-        Grafo matriz = new Grafo();
+    public Grafo<Tipo> ler(String string) throws IOException{
+        
         
         ArrayList<Aresta> lista_de_arestas = new ArrayList<Aresta>();
         Cidade cidade = new Cidade<>();
@@ -29,7 +29,9 @@ import java.util.ArrayList;
         int numero_de_casos = Integer.parseInt(linha);
         System.out.println(numero_de_casos);
         String[] obj;
-
+        
+        Grafo<Tipo> matriz = new Grafo<Tipo>(numero_de_casos);
+        
         // Percorre as linhas do arquivo txt responsáveis por indicar o código e o nome da cidade
         for (int i=0;i <=numero_de_casos-1;i++){
             linha = buffRead.readLine();
