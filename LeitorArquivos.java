@@ -1,9 +1,8 @@
-
-
-
 package grafos;
 
-    
+import grafos.Grafo;
+import grafos.Aresta;
+import grafos.Vertice;   
 import java.io.BufferedReader;
 import java.io.Console;
 import java.io.FileReader;
@@ -12,14 +11,14 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 
  public class LeitorArquivos<Tipo extends Comparable<Tipo>>{
- 
-
-    public Grafo<> ler(String string) throws IOException{
-        Grafo matriz = new Grafo();
+    Grafo matriz =new Grafo<>(0) ;
+    Cidade cidade= new Cidade(1,"cidade0") ;
+    Vertice vertice = new Vertice(cidade);
+    public Grafo<Tipo> ler(String string) throws IOException{
+        
         
         ArrayList<Aresta> lista_de_arestas = new ArrayList<Aresta>();
-        Cidade cidade = new Cidade<>();
-        Vertice vertice = new Vertice();
+        
         ArrayList<Vertice> lista_de_Vertices = new ArrayList<Vertice>();
         
         long tempoInicial = System.currentTimeMillis();
@@ -34,9 +33,10 @@ import java.util.ArrayList;
         for (int i=0;i <=numero_de_casos-1;i++){
             linha = buffRead.readLine();
             obj = linha.split(";");
-            cidade.setCodigo(Integer.parseInt(obj[0]));cidade.setNome(obj[1]);
-            vertice.setValor(cidade);
-            lista_de_Vertices.add(vertice);
+            this.cidade.setCodigo(Integer.parseInt(obj[0]));
+            this.cidade.setNome(obj[1]);
+            this.vertice.setValor(this.cidade);
+            lista_de_Vertices.add(this.vertice);
         }
 
 
@@ -51,7 +51,7 @@ import java.util.ArrayList;
                 Aresta aresta = new Aresta();
                 aresta.setOrigem(lista_de_Vertices.get(linhas_da_matriz));
                 aresta.setDestino(lista_de_Vertices.get(linhas_da_matriz));
-                aresta.setPeso(Integer.parseInt(obj[coluna_da_matriz]));
+                aresta.setPeso(Float.parseFloat((obj[coluna_da_matriz]).replace(",", ".")));
                 lista_de_arestas.add(aresta);
             }
 
@@ -61,14 +61,14 @@ import java.util.ArrayList;
          }
 
          
-        matriz.setarestas(lista_de_arestas);
-        matriz.setvertices(lista_de_Vertices);
-        matriz.setqArestas(numero_de_casos);
+        this.matriz.setarestas(lista_de_arestas);
+        this.matriz.setvertices(lista_de_Vertices);
+        this.matriz.setqArestas(numero_de_casos);
         buffRead.close();
         long tempo = System.currentTimeMillis() - tempoInicial;
         System.out.println("O método foi executado em " +tempo+" ms");
-
-        return  matriz;
+         
+        return  this.matriz;
     }
 
   

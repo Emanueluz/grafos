@@ -1,7 +1,7 @@
 /** @author Emanuel Norjosa Luz e Giovanni Sencioles */
 package grafos;
 
-public class Aresta {
+public class Aresta <Tipo extends Comparable<Tipo>>{
     private Vertice origem,destino;
     private float peso;
 
