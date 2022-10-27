@@ -37,7 +37,7 @@ public class main <Tipo extends Comparable<Tipo>>{
                     ArrayList<Aresta> cidades_vizinhas = grafo.arestas_da_origem(grafo.achar_Vertice(codigo_da_cidade));
                     System.out.println("CODIGO DA CIDADE VIZINHA ;NOME DA CIDADE VIZINHA ; DISTANCIA DA ORIGEM "); 
                     for(int i=0;i==cidades_vizinhas.size();i++){
-                        Cidade cidade_aux= ((cidades_vizinhas.get(i)).getDestino().getValor());
+                        Cidade  cidade_aux= (Cidade) ((cidades_vizinhas.get(i)).getDestino().getValor());
                         System.out.println(
                     
                         cidade_aux.getCodigo()+"  -----  "+
