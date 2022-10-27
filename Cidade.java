@@ -2,7 +2,7 @@
 
 package grafos;
 
-public class Cidade implements Comparable<Cidade>{
+public class Cidade extends Comparable {
     private int codigo;
     private String nome;
     Cidade(int c, String nm){

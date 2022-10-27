@@ -49,8 +49,6 @@ public class Grafo<Tipo extends Comparable<Tipo>>{
             }
         }
 
-
-        return null;
     }
 
 
