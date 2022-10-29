@@ -2,7 +2,7 @@
 
 package grafos;
 
-public class Cidade <Tipo extends Comparable<Tipo>>{
+public class Cidade implements Comparable{
     private int codigo;
     private String nome;
     Cidade(int c, String nm){
@@ -12,12 +12,13 @@ public class Cidade <Tipo extends Comparable<Tipo>>{
     public int getCodigo(){
         return this.codigo;
     }
+        public void setCodigo(int c){
+        this.codigo = c;
+    }
     public String getNome(){
         return this.nome;
     }
-    public void setCodigo(int c){
-        this.codigo = c;
-    }
+
     public void setNome(String nm){
         this.nome = nm;
     }

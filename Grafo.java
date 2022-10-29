@@ -10,11 +10,10 @@ public class Grafo<Tipo extends Comparable<Tipo>>{
     private ArrayList<Vertice<Tipo>> vertices;
     private int qArestas;
     
-    Grafo( int q){
+    Grafo( ){
         this.arestas = new ArrayList<Aresta<Tipo>>();
         this.vertices = new ArrayList<Vertice<Tipo>>();
-        this.qArestas = q;
-    }
+     }
     
     public ArrayList<Aresta<Tipo>> getarestas(){
         return this.arestas;
@@ -31,7 +30,7 @@ public class Grafo<Tipo extends Comparable<Tipo>>{
          this.vertices= A;
     }
     public int getqArestas(){
-        return this.arestas;
+        return this.qArestas;
     }
     public void setqArestas(int A)
     {
@@ -44,7 +43,7 @@ public class Grafo<Tipo extends Comparable<Tipo>>{
     public Vertice achar_Vertice(int codigo ){
         
         for(int i=0;i==this.vertices.size();i++){
-            if(this.vertices.get(i).getValor()==codigo){
+            if(this.vertices.get(i).getValor()).getCodigo()==codigo){
                 return this.vertices.get(i);
             }
         }
@@ -56,12 +55,12 @@ public class Grafo<Tipo extends Comparable<Tipo>>{
     public ArrayList<Aresta<Tipo>>  arestas_da_origem(Vertice vertice){
 
          ArrayList<Aresta<Tipo>> vizinhas= new ArrayList<Aresta<Tipo>>();
-         ;
-
+   
          for(int i=0;i==this.arestas.size();i++){
             if ((this.arestas.get(i)).getOrigem()==vertice){
                 vizinhas.add((this.arestas.get(i)));
             
+                
             
                }
     }

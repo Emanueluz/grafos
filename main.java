@@ -8,10 +8,10 @@ import java.util.Scanner;
 import grafos.Cidade;
 public class main <Tipo extends Comparable<Tipo>>{
     static Grafo grafo;
-	public static void main(String[] args) {
+ 	public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Scanner nome_cidade = new Scanner(System.in);
-        String matricula = "";
+         
         int menu = 0;
         LeitorArquivos leitor = new LeitorArquivos();
        
@@ -30,11 +30,46 @@ public class main <Tipo extends Comparable<Tipo>>{
             if(menu==1){ 
                 System.out.println("digite o codigo da cidade que quer consultar :");
                 int codigo_da_cidade = nome_cidade.nextInt();
-                Vertice v =  grafo.achar_Vertice(codigo_da_cidade);
+                Vertice v=null;
+                Vertice v_aux=null;
+                Cidade aux=null;
+                for(int i=0;i==grafo.getvertices().size();i++){
+                    v_aux=(Vertice)grafo.getvertices().get(i);
+                    aux =(Cidade) (v_aux.getValor());
+                    if(aux.getCodigo()==codigo_da_cidade){
+                        v = (Vertice) grafo.getvertices().get(i);
+                    }
+                }
+            
+                
+
+
+
+
+
+
+
                 if (v==null){
                     System.out.println("CIDADE NÃO LISTADA");
                 }else{
-                    ArrayList<Aresta> cidades_vizinhas = grafo.arestas_da_origem(grafo.achar_Vertice(codigo_da_cidade));
+                    ArrayList<Aresta> cidades_vizinhas = grafo.arestas_da_origem(v);
+
+
+                   
+                        for(int i=0;i==grafo.getarestas().size();i++){
+
+                           if (((Aresta) grafo.getarestas().get(i)).getOrigem()==v){
+                               cidades_vizinhas.add((Aresta) grafo.getarestas().get(i));
+                            }}
+                           
+
+
+
+
+
+
+
+
                     System.out.println("CODIGO DA CIDADE VIZINHA ;NOME DA CIDADE VIZINHA ; DISTANCIA DA ORIGEM "); 
                     for(int i=0;i==cidades_vizinhas.size();i++){
                         Cidade  cidade_aux= (Cidade) ((cidades_vizinhas.get(i)).getDestino().getValor());
@@ -50,13 +85,18 @@ public class main <Tipo extends Comparable<Tipo>>{
                 }
                 nome_cidade.close();
             }
-            else if(menu==2){} 
-            else if(menu==99){}
-            else{ 
-                System.out.println("DADO DE ENTRADA INVALIDO ");}
+            
+              
+               
+                else if(menu==99){}
+                else{ 
+                    System.out.println("DADO DE ENTRADA INVALIDO ");}
+            
+            
+            }
+          
     } 
 }
 
 
 
-}

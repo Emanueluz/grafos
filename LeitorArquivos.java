@@ -11,9 +11,8 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 
  public class LeitorArquivos<Tipo extends Comparable<Tipo>>{
-    Grafo matriz =new Grafo<>(0) ;
-    Cidade cidade= new Cidade(1,"cidade0") ;
-    Vertice vertice = new Vertice(cidade);
+    Grafo matriz =new Grafo() ;
+     Vertice vertice = new Vertice( );
     public Grafo<Tipo> ler(String string) throws IOException{
         
         
@@ -33,9 +32,8 @@ import java.util.ArrayList;
         for (int i=0;i <=numero_de_casos-1;i++){
             linha = buffRead.readLine();
             obj = linha.split(";");
-            this.cidade.setCodigo(Integer.parseInt(obj[0]));
-            this.cidade.setNome(obj[1]);
-            this.vertice.setValor(this.cidade);
+            Cidade  cidade= new Cidade(Integer.parseInt(obj[0]), obj[1]);
+            this.vertice.setValor(cidade);
             lista_de_Vertices.add(this.vertice);
         }
 
