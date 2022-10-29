@@ -37,10 +37,7 @@ import java.util.ArrayList;
             vertice.setValor(cidade);
             lista_de_Vertices.add(vertice);
         }
-        for (int i=0; i<lista_de_Vertices.size();i++){
-            System.out.println(((Cidade) lista_de_Vertices.get(i).getValor()).getNome());
-        }
-
+   
         /* loop que converte matriz de arestas do arquivo txt em grafo*/
  
         for (int linhas_da_matriz = 0;linhas_da_matriz <=numero_de_casos-1;linhas_da_matriz++){
