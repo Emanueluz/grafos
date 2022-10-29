@@ -7,7 +7,8 @@ import java.util.ArrayList;
 public class Vertice<Tipo extends Comparable<Tipo>>{
     private Tipo valor; //Alocacao generica de cidade
     
-    Vertice(){    }
+    Vertice( ){  
+      }
     public Tipo getValor(){
         return this.valor;
     }

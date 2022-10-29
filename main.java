@@ -19,10 +19,9 @@ public class main <Tipo extends Comparable<Tipo>>{
         grafo = leitor.ler("entrada.txt") ;}
         catch (IOException e) {
         e.printStackTrace();}
-     
         while(menu!=99){
             System.out.println(
-                "i.  Obter cidades vizinhas: digite 1\n"+
+                "i.  Obter cidades vizinhas: digite \n"+
                 "ii.  Obter todos os caminhos a partir de uma cidade digite 2\n"+
                 "iii.  Sair: digite 99"
             );
@@ -30,60 +29,46 @@ public class main <Tipo extends Comparable<Tipo>>{
             if(menu==1){ 
                 System.out.println("digite o codigo da cidade que quer consultar :");
                 int codigo_da_cidade = nome_cidade.nextInt();
-                Vertice v=null;
-                Vertice v_aux=null;
-                Cidade aux=null;
-                for(int i=0;i==grafo.getvertices().size();i++){
-                    v_aux=(Vertice)grafo.getvertices().get(i);
-                    aux =(Cidade) (v_aux.getValor());
+                System.out.println(grafo.getvertices().size());
+                int l = grafo.getvertices().size();
+                Vertice   v =null;
+                for(int i=0;i<l;i++){
+                    Vertice  v_aux=(Vertice)grafo.getvertices().get(i);
+                    Cidade aux =(Cidade) (v_aux.getValor());
+
+                    System.out.println(aux.getNome()+" ----- "+aux.getCodigo());
                     if(aux.getCodigo()==codigo_da_cidade){
-                        v = (Vertice) grafo.getvertices().get(i);
+                            v = (Vertice) grafo.getvertices().get(i);
+                            System.out.println("cidade celecionada == "+ aux.getNome());
+                            break;
                     }
                 }
             
-                
+ 
 
-
-
-
-
-
-
-                if (v==null){
+                if (v ==null){
                     System.out.println("CIDADE NÃO LISTADA");
                 }else{
-                    ArrayList<Aresta> cidades_vizinhas = grafo.arestas_da_origem(v);
-
-
-                   
-                        for(int i=0;i==grafo.getarestas().size();i++){
-
+                    ArrayList<Aresta> cidades_vizinhas= new ArrayList<Aresta>();
+                        for(int i=0;i<grafo.getarestas().size();i++){
                            if (((Aresta) grafo.getarestas().get(i)).getOrigem()==v){
-                               cidades_vizinhas.add((Aresta) grafo.getarestas().get(i));
+                            System.out.println(((Cidade)((Vertice)((Aresta) grafo.getarestas().get(i)).getDestino()).getValor()).getNome());   
+                            
+                            cidades_vizinhas.add((Aresta) grafo.getarestas().get(i));
+
                             }}
-                           
-
-
-
-
-
-
-
-
                     System.out.println("CODIGO DA CIDADE VIZINHA ;NOME DA CIDADE VIZINHA ; DISTANCIA DA ORIGEM "); 
-                    for(int i=0;i==cidades_vizinhas.size();i++){
-                        Cidade  cidade_aux= (Cidade) ((cidades_vizinhas.get(i)).getDestino().getValor());
-                        System.out.println(
+                    for(int i=0;i<cidades_vizinhas.size();i++){
+                         System.out.println(
                     
-                        cidade_aux.getCodigo()+"  -----  "+
-                        cidade_aux.getNome()+"  -----  "+
+                        ( (Cidade) ((cidades_vizinhas.get(i)).getDestino().getValor())).getCodigo()+"  -----  "+
+                        ( (Cidade) ((cidades_vizinhas.get(i)).getDestino().getValor())).getNome()+"  -----  "+
                         (cidades_vizinhas.get(i)).getPeso()+"\n"); 
                     }
                 
-                     //String[] cidade_vizinhas = new String();
-
+ 
                 }
-                nome_cidade.close();
+                
             }
             
               
@@ -94,6 +79,7 @@ public class main <Tipo extends Comparable<Tipo>>{
             
             
             }
+            nome_cidade.close();
           
     } 
 }

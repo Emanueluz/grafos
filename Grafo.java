@@ -40,15 +40,7 @@ public class Grafo<Tipo extends Comparable<Tipo>>{
         return (this.arestas.get(linha)).get(coluna);
     }
     
-    public Vertice achar_Vertice(int codigo ){
-        
-        for(int i=0;i==this.vertices.size();i++){
-            if(this.vertices.get(i).getValor()).getCodigo()==codigo){
-                return this.vertices.get(i);
-            }
-        }
-
-    }
+    
 
 
 
