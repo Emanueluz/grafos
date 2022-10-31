@@ -70,11 +70,12 @@ public class main <Tipo extends Comparable<Tipo>>{
             
                 else if (menu==2){
 
+                    System.out.println("digite o codigo da cidade que quer consultar :");
 
 
 
 
-                    
+
                 }
                
                 else if(menu==99){}
