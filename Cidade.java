@@ -21,7 +21,7 @@ public class Cidade implements Comparable{
     public void setNome(String nm){
         this.nome = nm;
     }
-    @Override
+    
     public int compareTo(Cidade o) {
         if (this.codigo == o.codigo){
             return 0;
@@ -36,5 +36,10 @@ public class Cidade implements Comparable{
     @Override
     public String toString() {
 	return ("Codigo: " + Integer.toString(this.codigo) + " - Nome: " + this.nome);
+    }
+    @Override
+    public int compareTo(Object o) {
+        // TODO Auto-generated method stub
+        return 0;
     }
 }

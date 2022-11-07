@@ -1,7 +1,5 @@
 package grafos;
 
-import grafos.Grafo;
-import grafos.Aresta;
 import grafos.Vertice;   
 import java.io.BufferedReader;
 import java.io.Console;

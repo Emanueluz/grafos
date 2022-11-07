@@ -14,6 +14,16 @@ public class Grafo<Tipo extends Comparable<Tipo>>{
         this.arestas = new ArrayList<Aresta<Tipo>>();
         this.vertices = new ArrayList<Vertice<Tipo>>();
      }
+     public void D(Cidade origem, Cidade destino){
+
+        
+
+
+
+     }
+
+
+
     
     public ArrayList<Aresta<Tipo>> getarestas(){
         return this.arestas;
@@ -35,9 +45,6 @@ public class Grafo<Tipo extends Comparable<Tipo>>{
     public void setqArestas(int A)
     {
          this.qArestas=A;
-    }
-    public retornar_aresta(int linha, int coluna){
-        return (this.arestas.get(linha)).get(coluna);
     }
     
     

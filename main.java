@@ -1,11 +1,9 @@
 
 package grafos;
-import grafos.Grafo;
 import grafos.Vertice;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import grafos.Cidade;
 public class main <Tipo extends Comparable<Tipo>>{
     static Grafo grafo;
  	public static void main(String[] args) {
@@ -16,7 +14,7 @@ public class main <Tipo extends Comparable<Tipo>>{
         LeitorArquivos leitor = new LeitorArquivos();
        
         try{
-        grafo = leitor.ler("entrada.txt") ;}
+        grafo = leitor.ler("grafos\\entrada.txt") ;}
         catch (IOException e) {
         e.printStackTrace();}
         while(menu!=99){
@@ -29,7 +27,7 @@ public class main <Tipo extends Comparable<Tipo>>{
             if(menu==1){ 
                 System.out.println("digite o codigo da cidade que quer consultar :");
                 int codigo_da_cidade = nome_cidade.nextInt();
-                 int l = grafo.getvertices().size();
+                int l = grafo.getvertices().size();
                 Vertice   v =null;
                 for(int i=0;i<l;i++){
                     Vertice  v_aux=(Vertice)grafo.getvertices().get(i);
