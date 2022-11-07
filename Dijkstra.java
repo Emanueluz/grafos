@@ -59,7 +59,8 @@ public class Dijkstra<Tipo extends Comparable>{
                 }}
                  
             fechados.add( lista_de_vertices.get(estimativas.indexOf(vertice_com_menor_estimativa)));
-
+            if (fechados.size()<abertos.size()){atual=lista_de_vertices.get(estimativas.indexOf(vertice_com_menor_estimativa));}
+            
 
             }}}
 
