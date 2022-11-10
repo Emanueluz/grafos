@@ -13,57 +13,70 @@ public class Dijkstra<Tipo extends Comparable>{
 
 
 
-    void montar_dijkstra(Grafo grafo, Vertice origem ){
-        Vertice atual =origem;
-        ArrayList<Aresta> lista_de_arestas= grafo.getarestas();
-        ArrayList<Vertice> lista_de_vertices = grafo.getvertices();
-        ArrayList<Vertice> lista_de_precedentes = grafo.getvertices();
-        ArrayList estimativas= new ArrayList<Float>();
-        for(int i=0;i<grafo.getvertices().size();i++){ estimativas.add(999999);}
+    public void montar_dijkstra(Grafo grafo, Cidade origem ){
+        Vertice atual =new Vertice();
+        for (int i=0;i<grafo.getvertices().size();i++){
+            if (((Vertice)grafo.getvertices().get(i)).getValor()==origem){
+                atual = (Vertice)grafo.getvertices().get(i);
+            }
 
-
-        ArrayList abertos =grafo.getvertices();
-        ArrayList<Vertice> fechados = new ArrayList();
+        }
         
-        ArrayList distancia ;// lista de vertices do grafo 
-        ArrayList predecessores ;//colocar um valor inicial que indique que o predecessor n foi calculado 
+        ArrayList<Aresta> lista_de_arestas= grafo.getarestas();
+        ArrayList<Vertice>  lista_de_precedentes= new ArrayList<Vertice>();//colocar um valor inicial que indique que o predecessor n foi calculado 
+        ArrayList estimativas= new ArrayList();
+        
+        for(int u =0;u<grafo.getvertices().size();u++){estimativas.add(u, 99999);lista_de_precedentes.add((Vertice)grafo.getvertices().get(u));}
+        ArrayList abertos =grafo.getvertices();
+        ArrayList<Vertice> fechados = new ArrayList(); 
 
+        
+        int t=0;
+         ArrayList<Vertice> lista_de_vertices = grafo.getvertices();// lista de vertices do grafo
+        int aux=0;    
+      
+        System.out.println(estimativas.size());    
+        estimativas.set(aux,0);
+        estimativas.set(lista_de_vertices.indexOf(atual),0);
+        lista_de_precedentes.set(lista_de_vertices.indexOf(atual),atual);
+        fechados.add(atual);
+        while(fechados.size()<lista_de_vertices.size() || t ==1){
 
-
-        while(fechados.size()<lista_de_vertices.size()){
-            for (int i = 0 ; i<lista_de_arestas.size();i++){ //pecorrendo a lista de arestas para saber quais são as cidades vizinhas
-                if((Vertice)lista_de_arestas.get(i).getOrigem()==atual){
+            for ( int i = 0 ; i<lista_de_arestas.size();i++){ //pecorrendo a lista de arestas para saber quais são as cidades vizinhas
+                if((Vertice)lista_de_arestas.get(i).getOrigem()==atual && fechados.contains(fechados)==false){
                     //marcando os VERTICES QUE ESTÃO ABERTOS
                     //marcando as ESTIMATIVAS das distancias
                     //marcando os PRECEDENTES
                     //para a marcação ocorrer, os verteces tem que estar marcadas como abertos 
-                    if(lista_de_precedentes.contains((Vertice)lista_de_arestas.get(i).getOrigem()) && abertos.contains((Vertice)lista_de_arestas.get(i).getOrigem())  ) {
-                        int index = lista_de_precedentes.indexOf((Vertice)lista_de_arestas.get(i).getOrigem());
-                            if ((Float)estimativas.get(index)<lista_de_arestas.get(i).getPeso()){
-                                lista_de_precedentes.set(index, atual); // define os precedentes dos "próximos" vertices
-                                estimativas.set(index, lista_de_arestas.get(i).getPeso()); // define os pesos de um vertice a outro       
-                            }}}}
+                    int index = lista_de_precedentes.indexOf((Vertice)lista_de_arestas.get(i).getOrigem());
+                    if ((int)estimativas.get(index)<(int)lista_de_arestas.get(i).getPeso()){
+                         
+                            lista_de_precedentes.set(index, atual); // define os precedentes dos "próximos" vertices
+                        
+                            estimativas.set(index, lista_de_arestas.get(i).getPeso()); // define os pesos de um vertice a outro       
+                            System.out.println("CIDADE : "+(((Cidade)atual.getValor()).getNome())+"   ESTIMATIVA  : "+lista_de_arestas.get(i).getPeso()+"   PRECEDENTES  : "+((Cidade)lista_de_precedentes.get(i).getValor()).getNome());
+                        }}}}
+                            t=1;}} 
 
 
             // seleciona qual dos caminhos é mais curto 
             //e fecha para selecionar o próximo vertice a ser analizado
-            float vertice_com_menor_estimativa=9999999;
+            /*
+            float vertice_com_menor_estimativa=99999;
                 
             for (int k=0;k<lista_de_precedentes.size();k++){
                
-                if ((Vertice)lista_de_precedentes.get(k)==atual && (float)estimativas.get(lista_de_vertices.indexOf(atual))!=0 ){
-                    float estimativa_atual= (float)estimativas.get(lista_de_vertices.indexOf(atual));
+                if ((Vertice)lista_de_precedentes.get(k)==atual && (int)estimativas.get(lista_de_vertices.indexOf(atual))!=0 ){
+                    float estimativa_atual= (int)estimativas.get(lista_de_vertices.indexOf(atual));
                     if (vertice_com_menor_estimativa>estimativa_atual){
                         vertice_com_menor_estimativa=estimativa_atual;
                     }
                 }}
-                 
-            fechados.add( lista_de_vertices.get(estimativas.indexOf(vertice_com_menor_estimativa)));
+             fechados.add( lista_de_vertices.get(estimativas.indexOf(vertice_com_menor_estimativa)));
             if (fechados.size()<abertos.size()){atual=lista_de_vertices.get(estimativas.indexOf(vertice_com_menor_estimativa));}
+                 */
+
             
-
-            }}}
-
 
 
        

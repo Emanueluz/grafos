@@ -15,4 +15,13 @@ public class Vertice<Tipo extends Comparable<Tipo>>{
     public void setValor(Tipo c){
         this.valor = c;
     }
+
+    public boolean compareTo(Vertice v){
+        if (this.valor==v.getValor()){
+            return true;
+        }
+        else{
+        return false;
+    } 
+    }
 }

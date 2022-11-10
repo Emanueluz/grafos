@@ -23,7 +23,8 @@ public class main <Tipo extends Comparable<Tipo>>{
                 "ii.  Obter todos os caminhos a partir de uma cidade digite 2\n"+
                 "iii.  Sair: digite 99"
             );
-            menu =scanner.nextInt();
+            menu =3;//scanner.nextInt();
+            
             if(menu==1){ 
                 System.out.println("digite o codigo da cidade que quer consultar :");
                 int codigo_da_cidade = nome_cidade.nextInt();
@@ -76,6 +77,16 @@ public class main <Tipo extends Comparable<Tipo>>{
 
                 }
                
+
+                else if(menu==3){
+
+                    Dijkstra d= new Dijkstra();
+                    
+                    d.montar_dijkstra(grafo, ((Cidade)((Vertice)grafo.getvertices().get(1)).getValor()));
+                }
+
+
+
                 else if(menu==99){}
                 else{ 
                     System.out.println("DADO DE ENTRADA INVALIDO ");}
