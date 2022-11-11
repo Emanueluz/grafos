@@ -44,7 +44,7 @@ import java.util.ArrayList;
 
 
             for (int coluna_da_matriz=0;coluna_da_matriz<=obj.length-1;coluna_da_matriz++){
-                if (obj[coluna_da_matriz]!="0,00"){
+                if (Float.parseFloat((obj[coluna_da_matriz]).replace(",", "."))!=0){
                 Aresta aresta = new Aresta();
                 aresta.setOrigem(lista_de_Vertices.get(linhas_da_matriz));
                 aresta.setDestino(lista_de_Vertices.get(coluna_da_matriz));
@@ -57,7 +57,7 @@ import java.util.ArrayList;
             
              
          }
-
+              
          
         this.matriz.setarestas(lista_de_arestas);
         this.matriz.setvertices(lista_de_Vertices);

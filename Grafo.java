@@ -14,14 +14,7 @@ public class Grafo<Tipo extends Comparable<Tipo>>{
         this.arestas = new ArrayList<Aresta<Tipo>>();
         this.vertices = new ArrayList<Vertice<Tipo>>();
      }
-     public void D(Cidade origem, Cidade destino){
-
-        
-
-
-
-     }
-
+  
 
 
     
@@ -46,11 +39,7 @@ public class Grafo<Tipo extends Comparable<Tipo>>{
     {
          this.qArestas=A;
     }
-    
-    
-
-
-
+ 
     public ArrayList<Aresta<Tipo>>  arestas_da_origem(Vertice vertice){
 
          ArrayList<Aresta<Tipo>> vizinhas= new ArrayList<Aresta<Tipo>>();
@@ -63,7 +52,10 @@ public class Grafo<Tipo extends Comparable<Tipo>>{
             
                }
     }
-        return vizinhas;
-     }
-}
+        return vizinhas; 
+    }
+
+ 
+    }
+ 
 
