@@ -114,7 +114,9 @@ public class main <Tipo extends Comparable<Tipo>>{
                     ori.close();
                     des.close();
                 }
-
+                else if(menu==4){
+                    grafo.prim();
+                }
 
 
                 else if(menu==99){}

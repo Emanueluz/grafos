@@ -2,8 +2,7 @@
 package grafos;
 
 import java.util.ArrayList;
-import grafos.Vertice.*;
-import grafos.Aresta.*;
+ 
 
 public class Grafo<Tipo extends Comparable<Tipo>>{
     private ArrayList<Aresta<Tipo>>  arestas ;
@@ -54,6 +53,34 @@ public class Grafo<Tipo extends Comparable<Tipo>>{
     }
         return vizinhas; 
     }
+
+    public void prim(){
+        ArrayList v_vertices= new ArrayList<>();
+        ArrayList v_aretas= new ArrayList<>();
+        Vertice v_atual= this.vertices.get(0);
+        Aresta a_atual= this.arestas.get(0);
+        v_vertices.add(v_atual); // lista de vertices visitados 
+        while(this.vertices.size() > v_vertices.size()){
+            float f_aux=(float) 999999;
+            for(int i =0; i<this.arestas.size();i++){
+                if(this.arestas.get(i).getPeso()<f_aux && v_vertices.contains(this.arestas.get(i).getOrigem())==true && v_vertices.contains(this.arestas.get(i).getDestino())==false){
+                    f_aux = this.arestas.get(i).getPeso();
+                    v_atual=this.arestas.get(i).getDestino();
+                    a_atual=this.arestas.get(i);
+                    
+            }
+            if(v_vertices.contains(v_atual)==false) {
+            v_vertices.add(v_atual);
+            v_aretas.add(a_atual);
+            System.out.println("origem:"+((Cidade)a_atual.getOrigem().getValor()).getNome()+"     destino:"+((Cidade)a_atual.getDestino().getValor()).getNome()+"   peso:"+a_atual.getPeso());
+            }
+        }
+
+        }
+
+
+    }
+    
 
  
     }
