@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class main <Tipo extends Comparable<Tipo>>{
     static Grafo grafo;
  	public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        
         Scanner nome_cidade = new Scanner(System.in);
          
         int menu = 0;
@@ -24,7 +24,8 @@ public class main <Tipo extends Comparable<Tipo>>{
                 "Calcular caminho mínimo: digite 3\n"+
                 "iii.  Sair: digite 99"
             );
-            menu = scanner.nextInt();
+            Scanner menu_s = new Scanner(System.in);
+            menu = menu_s.nextInt();
             
             if(menu==1){ 
                 System.out.println("digite o codigo da cidade que quer consultar :");
@@ -81,29 +82,38 @@ public class main <Tipo extends Comparable<Tipo>>{
 
                 else if(menu==3){
                     ArrayList<Cidade> cidades = new ArrayList<Cidade>();
-                    for (int i =0;i<grafo.getvertices().size();i++){cidades.add(((Cidade)((Vertice)grafo.getvertices().get(i)).getValor()));}
-                    int origem,destino;
-                    origem=1;
-                    destino=2; 
-                    System.out.println("CAMINHO: "+"\nDISTANCIA: ");
-                    Boolean valida_origem =false; Boolean valida_destino=false;
-
-                    while(valida_origem==false || valida_destino==false){
-                    for(int i =0; i<cidades.size();i++){
-                        if(cidades.get(i).getCodigo()==origem){valida_origem=true;}}
-                        if (valida_origem==false){System.out.println("codigo para cidade origem não é valido");}
-                        for(int i =0; i<cidades.size();i++){
-                        if(cidades.get(i).getCodigo()==destino){valida_destino=true;}}
-                        if (valida_destino==false){System.out.println("codigo para cidade destino não é valido");};
-                    }
-                    Vertice v_origem=new Vertice<>();
-                    Vertice v_destino=new Vertice<>();
+                    ArrayList num_cidades= new ArrayList<>();
                     for (int i =0;i<grafo.getvertices().size();i++){
-                         if(((Cidade)((Vertice) grafo.getvertices().get(i)).getValor()).getCodigo()==origem) {v_origem=((Vertice) grafo.getvertices().get(i));}
-                         if(((Cidade)((Vertice) grafo.getvertices().get(i)).getValor()).getCodigo()==destino) {v_destino=((Vertice) grafo.getvertices().get(i));}}
+                        cidades.add(((Cidade)((Vertice)grafo.getvertices().get(i)).getValor()));
+                        num_cidades.add(cidades.get(i).getCodigo());    
+                    }
+                    int origem,destino;
+                    Scanner ori = new Scanner(System.in);
+                    Scanner des = new Scanner(System.in);
+                    System.out.println("Cod da cidade origem:");
+                    origem=ori.nextInt();
+                     
+                     
+                    while(num_cidades.contains(origem)==false){
+                        System.out.println("codigo para cidade origem não é valido");
+                        System.out.println("Cod da cidade origem:");
+                        origem=ori.nextInt();
+                    }
+                    System.out.println("Cod da cidade destino:");
+                    destino=des.nextInt();
+                    while(num_cidades.contains(destino)==false){
+                        System.out.println("codigo para cidade destino não é valido");
+                        System.out.println("Cod da cidade destino:");
+                        origem=ori.nextInt();
+                    }
+                    Vertice v_origem=(Vertice)grafo.getvertices().get(num_cidades.indexOf(origem));
+                    Vertice v_destino=(Vertice)grafo.getvertices().get(num_cidades.indexOf(destino));
+                     
                     Dijkstra d= new Dijkstra();
-                    d.montar_dijkstra(grafo, ( ((Vertice)grafo.getvertices().get(1)) ),( ((Vertice)grafo.getvertices().get(3)) ));
-                 }
+                    d.montar_dijkstra(grafo, v_origem,v_destino);
+                    ori.close();
+                    des.close();
+                }
 
 
 
@@ -112,7 +122,7 @@ public class main <Tipo extends Comparable<Tipo>>{
                     System.out.println("DADO DE ENTRADA INVALIDO ");}
             
             
-            }
+            menu_s.close();}
             nome_cidade.close();
           
     } 
