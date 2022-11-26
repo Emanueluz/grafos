@@ -9,7 +9,9 @@ public class main <Tipo extends Comparable<Tipo>>{
  	public static void main(String[] args) {
         
         Scanner nome_cidade = new Scanner(System.in);
-         
+        Scanner menu_s = new Scanner(System.in);
+        Scanner ori = new Scanner(System.in);
+        Scanner des = new Scanner(System.in);
         int menu = 0;
         LeitorArquivos leitor = new LeitorArquivos();
        
@@ -24,7 +26,6 @@ public class main <Tipo extends Comparable<Tipo>>{
                 "Calcular caminho mínimo: digite 3\n"+
                 "iii.  Sair: digite 99"
             );
-            Scanner menu_s = new Scanner(System.in);
             menu = menu_s.nextInt();
             
             if(menu==1){ 
@@ -88,8 +89,7 @@ public class main <Tipo extends Comparable<Tipo>>{
                         num_cidades.add(cidades.get(i).getCodigo());    
                     }
                     int origem,destino;
-                    Scanner ori = new Scanner(System.in);
-                    Scanner des = new Scanner(System.in);
+                    
                     System.out.println("Cod da cidade origem:");
                     origem=ori.nextInt();
                      
@@ -111,21 +111,24 @@ public class main <Tipo extends Comparable<Tipo>>{
                      
                     Dijkstra d= new Dijkstra();
                     d.montar_dijkstra(grafo, v_origem,v_destino);
-                    ori.close();
-                    des.close();
+                    
                 }
                 else if(menu==4){
                     grafo.prim();
+                } 
+                else if(menu==5){
+                    grafo.fmaximo((Vertice)grafo.getvertices().get(1), (Vertice)grafo.getvertices().get(4));
                 }
-
-
                 else if(menu==99){}
                 else{ 
                     System.out.println("DADO DE ENTRADA INVALIDO ");}
             
             
-            menu_s.close();}
+             }
+            menu_s.close();
             nome_cidade.close();
+            ori.close();
+            des.close();
           
     } 
 }
