@@ -83,31 +83,76 @@ public class Grafo<Tipo extends Comparable<Tipo>>{
 
     public float fmaximo(Vertice origem, Vertice destino){
         ArrayList<Aresta<Tipo>>  lista_de_arestas =this.arestas;
-        ArrayList caminho = new ArrayList() ;
         float fmax = 0;
-        float fluxo_atual=9999999;
-        Vertice atual = origem;
-        ArrayList<Vertice<Tipo>> passados = new ArrayList<Vertice<Tipo>> ();
-        while(atual!= destino){
-            for (int j =0;j<lista_de_arestas.size();j++){
-                if ((lista_de_arestas.get(j).getOrigem()==atual) &&(lista_de_arestas.get(j).getPeso()>0) && passados.contains(lista_de_arestas.get(j).getDestino())==false){
-                    caminho.add(j);
-                    atual=lista_de_arestas.get(j).getDestino();
-                    System.out.println(((Cidade)atual.getValor()).getNome());
-                    passados.add(lista_de_arestas.get(j).getDestino());
-                    if(fluxo_atual>lista_de_arestas.get(j).getPeso()){
-                        fluxo_atual=lista_de_arestas.get(j).getPeso();
+        ArrayList<Vertice<Tipo>> ver_bloqueados = new ArrayList<Vertice<Tipo>> ();
+        ArrayList<Aresta<Tipo>>  ares_bloqueados =new ArrayList<Aresta<Tipo>>();
+        System.out.print(((Cidade)origem.getValor()).getNome());
+        System.out.print("==="+((Cidade)destino.getValor()).getNome());
+
+
+        while(/* //ver_bloqueados.contains(origem)==false*/ fmax<2){
+            float fluxo_atual=9999999;
+            ArrayList<Vertice<Tipo>> passados = new ArrayList<Vertice<Tipo>> ();
+            Vertice atual = origem;
+            ArrayList caminho = new ArrayList() ;
+ 
+            
+            for (int i =0;i<lista_de_arestas.size();i++){
+                
+                for (int j =0;j<lista_de_arestas.size();j++){
+                    if ((lista_de_arestas.get(j).getOrigem()==atual) &&
+                    (lista_de_arestas.get(j).getPeso() >0) && 
+                    passados.contains(lista_de_arestas.get(j).getDestino())==false && 
+                    ver_bloqueados.contains(lista_de_arestas.get(j).getDestino())==false) 
+                    {
+                        if (fluxo_atual==9999999){fluxo_atual=lista_de_arestas.get(j).getPeso();}
+
+                        
+                        passados.add(atual);
+                        caminho.add(j);
+                        atual=lista_de_arestas.get(j).getDestino();
+                        destino=lista_de_arestas.get(j).getDestino();
+                         if(fluxo_atual>lista_de_arestas.get(j).getPeso()){
+                            fluxo_atual=lista_de_arestas.get(j).getPeso();
+                    }}}
+            //
+        }
+
+
+
+        if (atual==destino){
+        for (int y =0;y<caminho.size();y++){
+            System.out.print(lista_de_arestas.get((int) caminho.get(y)).getPeso()+" === ");
+            lista_de_arestas.get((int) caminho.get(y)).setPeso(lista_de_arestas.get((int) caminho.get(y)).getPeso()-fluxo_atual);
+            System.out.println(lista_de_arestas.get((int) caminho.get(y)).getPeso());
+         }}
+        atual=origem; 
+        int aux_ver=0;
+        int conta_ares=0;
+        
+        //determina quais arestas e vertices nao podem mais ser usados para fazer caminhos
+        for(int k=0; k<this.vertices.size();k++){
+            for(int l=0; l<lista_de_arestas.size();l++){
+                if(lista_de_arestas.get(l).getOrigem()==this.vertices.get(k)){
+                    aux_ver=aux_ver+1;
+                }
+                if(lista_de_arestas.get(l).getPeso()==0){
+                    conta_ares=conta_ares+1;
+                }
+            }
+            if(aux_ver==conta_ares){
+                ver_bloqueados.add(this.vertices.get(k));
+                for(int q=0; q<lista_de_arestas.size();q++){
+                    if(ver_bloqueados.contains(lista_de_arestas.get(q).getDestino())){
+                        ares_bloqueados.add(lista_de_arestas.get(q));
                     }
                 }
             }
-        }        
-        
-        for (int i =0;i<caminho.size();i++){
-            System.out.print(lista_de_arestas.get((int) caminho.get(i)).getPeso()+" === ");
-            lista_de_arestas.get((int) caminho.get(i)).setPeso(lista_de_arestas.get((int) caminho.get(i)).getPeso()-fluxo_atual);
-            System.out.println(lista_de_arestas.get((int) caminho.get(i)).getPeso());
         }
-        
+         
+
+    
+    }
         return 0;
     }
     }
