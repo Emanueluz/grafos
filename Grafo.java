@@ -157,7 +157,7 @@ public class Grafo<Tipo extends Comparable<Tipo>>{
 
     
     }   System.out.println("O FLUXO MAXIMO É "+ fmax);
-        return 0;
+        return fmax;
     }
     }
  
