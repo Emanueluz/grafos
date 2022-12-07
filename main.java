@@ -23,8 +23,10 @@ public class main <Tipo extends Comparable<Tipo>>{
             System.out.println(
                 "i.  Obter cidades vizinhas: digite 1 \n"+
                 "ii.  Obter todos os caminhos a partir de uma cidade: digite 2\n"+
-                "Calcular caminho mínimo: digite 3\n"+
-                "iii.  Sair: digite 99"
+                "iii Calcular caminho mínimo: digite 3\n"+
+                "iv Calcular árvore geradora mínima: digite 4\n"+
+                "v Calcular fluxo maximo: digite 5\n"+
+                "vi.  Sair: digite 99"
             );
             menu = menu_s.nextInt();
             
@@ -92,8 +94,7 @@ public class main <Tipo extends Comparable<Tipo>>{
                     
                     System.out.println("Cod da cidade origem:");
                     origem=ori.nextInt();
-                     
-                     
+                    
                     while(num_cidades.contains(origem)==false){
                         System.out.println("codigo para cidade origem não é valido");
                         System.out.println("Cod da cidade origem:");
@@ -104,7 +105,7 @@ public class main <Tipo extends Comparable<Tipo>>{
                     while(num_cidades.contains(destino)==false){
                         System.out.println("codigo para cidade destino não é valido");
                         System.out.println("Cod da cidade destino:");
-                        origem=ori.nextInt();
+                        destino=ori.nextInt();
                     }
                     Vertice v_origem=(Vertice)grafo.getvertices().get(num_cidades.indexOf(origem));
                     Vertice v_destino=(Vertice)grafo.getvertices().get(num_cidades.indexOf(destino));
@@ -117,7 +118,37 @@ public class main <Tipo extends Comparable<Tipo>>{
                     grafo.prim();
                 } 
                 else if(menu==5){
-                    grafo.fmaximo((Vertice)grafo.getvertices().get(1), (Vertice)grafo.getvertices().get(4));
+                    
+                    
+
+
+                    ArrayList<Cidade> cidades = new ArrayList<Cidade>();
+                    ArrayList num_cidades= new ArrayList<>();
+                    for (int i =0;i<grafo.getvertices().size();i++){
+                        cidades.add(((Cidade)((Vertice)grafo.getvertices().get(i)).getValor()));
+                        num_cidades.add(cidades.get(i).getCodigo());    
+                    }
+                    int origem,destino;
+                    
+                    System.out.println("Cod da cidade origem:");
+                    origem=ori.nextInt();
+                    
+                    while(num_cidades.contains(origem)==false){
+                        System.out.println("codigo para cidade origem não é valido");
+                        System.out.println("Cod da cidade origem:");
+                        origem=ori.nextInt();
+                    }
+                    System.out.println("Cod da cidade destino:");
+                    destino=des.nextInt();
+                    while(num_cidades.contains(destino)==false){
+                        System.out.println("codigo para cidade destino não é valido");
+                        System.out.println("Cod da cidade destino:");
+                        destino=ori.nextInt();
+                    }
+                    Vertice v_origem=(Vertice)grafo.getvertices().get(num_cidades.indexOf(origem));
+                    Vertice v_destino=(Vertice)grafo.getvertices().get(num_cidades.indexOf(destino));
+                    System.out.println(((Cidade)v_origem.getValor()).getNome()+" ----- "+((Cidade)v_destino.getValor()).getNome());
+                    grafo.fmaximo(v_origem,v_destino);
                 }
                 else if(menu==99){}
                 else{ 
