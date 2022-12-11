@@ -73,10 +73,24 @@ public class main <Tipo extends Comparable<Tipo>>{
             }
             
                 else if (menu==2){
-
-                    System.out.println("digite o codigo da cidade que quer consultar :");
-
-
+                    ArrayList<Cidade> cidades = new ArrayList<Cidade>();
+                    ArrayList num_cidades= new ArrayList<>();
+                    for (int i =0;i<grafo.getvertices().size();i++){
+                        cidades.add(((Cidade)((Vertice)grafo.getvertices().get(i)).getValor()));
+                        num_cidades.add(cidades.get(i).getCodigo());    
+                    }
+                    int origem;
+                    
+                    System.out.println("Cod da cidade origem:");
+                    origem=ori.nextInt();
+                    
+                    while(num_cidades.contains(origem)==false){
+                        System.out.println("codigo para cidade origem não é valido");
+                        System.out.println("Cod da cidade origem:");
+                        origem=ori.nextInt();
+                    } 
+                    Vertice v_origem=(Vertice)grafo.getvertices().get(num_cidades.indexOf(origem));
+                    grafo.lista_de_caminhos(v_origem);
 
 
 

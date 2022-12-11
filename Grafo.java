@@ -81,6 +81,50 @@ public class Grafo<Tipo extends Comparable<Tipo>>{
         System.out.println("soma total dos pesos: " +soma);
     }
 
+    public void lista_de_caminhos(Vertice origem){
+        ArrayList<ArrayList<Aresta>> caminhos_possiveis= new ArrayList<ArrayList<Aresta>>();
+        ArrayList<Aresta> caminho= new ArrayList<>();
+        ArrayList<Vertice> passados = new ArrayList<Vertice>();
+        ArrayList<Aresta> aux_de_caminho  = new ArrayList<Aresta>();
+ 
+        Vertice atual =  origem;
+        int fim_do_caminho=0;
+        for (int k=0 ;k<this.arestas.size();k++){
+        for (int j=0 ;j<this.arestas.size();j++){ // loop para começar e/ou marcar um caminho como pecorrido
+            if (fim_do_caminho==this.arestas.size() && caminhos_possiveis.contains(aux_de_caminho)==false){ // verifica se um caminho chegou ao seu fim 
+                for(int a =0;a<passados.size();a++){ // se chegou ao fim, o programa printa o caminho 
+                   System.out.print(((Cidade)passados.get(a).getValor()).getNome() +" -- ");   
+                }
+                System.out.println( );
+                caminhos_possiveis.add(aux_de_caminho); // marca o caminho como já classificado, para n se repetir 
+                aux_de_caminho= new ArrayList<Aresta>();
+                passados= new ArrayList<Vertice>();
+            }
+
+ 
+            if (passados.size()==0){// caso vá começar um novo caminho 
+                passados.add(origem);
+            }
+            fim_do_caminho=0; // variavel axiliar para que o próximo loop consiga ser usado
+                              // para definir se houve ou não uma marcação 
+            
+            for(int i=0 ;i<this.arestas.size();i++){ // loop para verificar qual será o prócimo vertisse do caminho 
+                if(this.arestas.get(i).getOrigem()==atual  &&
+                passados.contains(this.arestas.get(i).getDestino())==false){
+                    aux_de_caminho.add(this.arestas.get(i)); // caminho auxiliar 
+ 
+                    if(caminhos_possiveis.contains(aux_de_caminho)==false){
+                    atual=this.arestas.get(i).getDestino();
+                    passados.add(atual);}
+                     else{( aux_de_caminho).remove((int)aux_de_caminho.size()-1);
+                    fim_do_caminho=fim_do_caminho+1;}
+                    
+                }
+                else{fim_do_caminho=fim_do_caminho+1;} // verificador se não houve nenhum vertisse elegivel para compor o caminho 
+            }
+        }}
+    }
+
     public void fmaximo(Vertice origem, Vertice destino){
         ArrayList<Aresta<Tipo>>  lista_de_arestas =this.arestas;
         float fmax = 0;
