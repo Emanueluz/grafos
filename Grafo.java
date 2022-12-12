@@ -89,14 +89,19 @@ public class Grafo<Tipo extends Comparable<Tipo>>{
  
         Vertice atual =  origem;
         int fim_do_caminho=0;
+        int contagem_caminho =0;
         for (int k=0 ;k<this.arestas.size();k++){
         for (int j=0 ;j<this.arestas.size();j++){ // loop para começar e/ou marcar um caminho como pecorrido
             if (fim_do_caminho==this.arestas.size() && caminhos_possiveis.contains(aux_de_caminho)==false){ // verifica se um caminho chegou ao seu fim 
+                contagem_caminho=contagem_caminho+1;
+                caminhos_possiveis.add(aux_de_caminho); // marca o caminho como já classificado, para n se repetir 
+                atual=origem;
+                System.out.print ("Caminho "+contagem_caminho+": ");
+
                 for(int a =0;a<passados.size();a++){ // se chegou ao fim, o programa printa o caminho 
-                   System.out.print(((Cidade)passados.get(a).getValor()).getNome() +" -- ");   
+                   System.out.print(((Cidade)passados.get(a).getValor()).getNome() +"   ");   
                 }
                 System.out.println( );
-                caminhos_possiveis.add(aux_de_caminho); // marca o caminho como já classificado, para n se repetir 
                 aux_de_caminho= new ArrayList<Aresta>();
                 passados= new ArrayList<Vertice>();
             }
