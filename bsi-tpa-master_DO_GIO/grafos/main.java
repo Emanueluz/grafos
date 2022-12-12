@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 public class main <Tipo extends Comparable<Tipo>>{
     static Grafo grafo;
- 	public static void main(String[] args) {
+ 	public static void main(String[] args) throws IOException {
         
         Scanner nome_cidade = new Scanner(System.in);
         Scanner menu_s = new Scanner(System.in);
@@ -16,7 +16,7 @@ public class main <Tipo extends Comparable<Tipo>>{
         LeitorArquivos leitor = new LeitorArquivos();
        
         try{
-        grafo = leitor.ler("grafos\\entrada.txt") ;}
+        grafo = leitor.ler("C:\\Users\\x\\Videos\\bsi-tpa-master\\grafos\\entrada.txt") ;}
         catch (IOException e) {
         e.printStackTrace();}
         while(menu!=99){
@@ -31,6 +31,7 @@ public class main <Tipo extends Comparable<Tipo>>{
             menu = menu_s.nextInt();
             
             if(menu==1){ 
+                
                 System.out.println("digite o codigo da cidade que quer consultar :");
                 int codigo_da_cidade = nome_cidade.nextInt();
                 int l = grafo.getvertices().size();
@@ -132,6 +133,8 @@ public class main <Tipo extends Comparable<Tipo>>{
                     grafo.prim();
                 } 
                 else if(menu==5){
+                    
+                    grafo = leitor.ler("C:\\Users\\x\\Videos\\bsi-tpa-master\\grafos\\entrada.txt") ;
                     
                     
 

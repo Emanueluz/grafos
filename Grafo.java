@@ -81,7 +81,7 @@ public class Grafo<Tipo extends Comparable<Tipo>>{
         System.out.println("soma total dos pesos: " +soma);
     }
 
-    public void lista_de_caminhos(Vertice origem){
+    public ArrayList<ArrayList<Aresta>> lista_de_caminhos(Vertice origem){
         ArrayList<ArrayList<Aresta>> caminhos_possiveis= new ArrayList<ArrayList<Aresta>>();
         ArrayList<Aresta> caminho= new ArrayList<>();
         ArrayList<Vertice> passados = new ArrayList<Vertice>();
@@ -127,86 +127,41 @@ public class Grafo<Tipo extends Comparable<Tipo>>{
                 }
                 else{fim_do_caminho=fim_do_caminho+1;} // verificador se não houve nenhum vertisse elegivel para compor o caminho 
             }
-        }}
+        }} return caminhos_possiveis;
     }
-
-    public void fmaximo(Vertice origem, Vertice destino){
-        ArrayList<Aresta<Tipo>>  lista_de_arestas =this.arestas;
-        float fmax = 0;
-        ArrayList<Vertice<Tipo>> ver_bloqueados = new ArrayList<Vertice<Tipo>> ();
-        ArrayList<Aresta<Tipo>>  ares_bloqueados =new ArrayList<Aresta<Tipo>>();
-  
-
-        while(ver_bloqueados.contains(origem)==false){
-            float fluxo_atual=9999999;
-            ArrayList<Vertice<Tipo>> passados = new ArrayList<Vertice<Tipo>> ();
-            Vertice atual = origem;
-            ArrayList caminho = new ArrayList() ;
-            System.out.println( );
-
-            for (int i =0;i<lista_de_arestas.size();i++){ //Caminhar o grafo até chegar ao destino
-                for (int j =0;j<lista_de_arestas.size();j++){
-                    if ((lista_de_arestas.get(j).getOrigem()==atual) &&  //Caso vertice atual esteja no comeco de dado caminho 
-                    (lista_de_arestas.get(j).getPeso() >0) &&  //e estar incluso em um arco positivo
-                    passados.contains(lista_de_arestas.get(j).getDestino())==false && //e o caminho para o vizinho nao tenha sido percorrido
-                    ver_bloqueados.contains(lista_de_arestas.get(j).getDestino())==false&&
-                    ares_bloqueados.contains(lista_de_arestas.get(j))==false)  //Adiciona o indice do atual ao caminho
-                    {
-                        if (fluxo_atual==9999999){fluxo_atual=lista_de_arestas.get(j).getPeso();}// dá a variavel axiliar o valor de fluxo da primeira aresta 
-
-                        System.out.print(((Cidade)atual.getValor()).getNome()+"-");
-                        passados.add(atual); //Novo atual incluso na lista de percorridos
-                        caminho.add(j); //Adiciona o indice do atual ao caminho
-                        atual=lista_de_arestas.get(j).getDestino(); //Atual recebe o vizinho
-                        System.out.print(((Cidade)atual.getValor()).getNome()+"   ");
-                         if(fluxo_atual>lista_de_arestas.get(j).getPeso()){
-                            fluxo_atual=lista_de_arestas.get(j).getPeso();  //Fluxo maximo atualizado com o peso do arco
-                    }}}
-            //
-        }
-
-        fmax= fmax+fluxo_atual; // incremento do fluxo máximo
-        // atualisa o valor de fluxo das arestas que formam o caminho 
-        if (atual==destino){
-        for (int y =0;y<caminho.size();y++){
-            
-            lista_de_arestas.get((int) caminho.get(y)).setPeso(lista_de_arestas.get((int) caminho.get(y)).getPeso()-fluxo_atual);
-            if (lista_de_arestas.get((int) caminho.get(y)).getPeso()==0){
-                ares_bloqueados.add(lista_de_arestas.get((int)caminho.get(y)));
-            System.out.println(((Cidade)lista_de_arestas.get((int) caminho.get(y)).getOrigem().getValor()).getNome() +" === === == "+((Cidade)lista_de_arestas.get((int) caminho.get(y)).getDestino().getValor()).getNome());}
-          }}
-        
-        atual=origem; 
-        //determina quais arestas e vertices nao podem mais ser usados para fazer caminhos
-        for(int k=0; k<this.vertices.size();k++){
-            int aux_ver=0;
-            int conta_ares=0;
-           // System.out.println("verificando outro vertice ");
-
-            for(int l=0; l<lista_de_arestas.size();l++){
-                if(lista_de_arestas.get(l).getOrigem()==this.vertices.get(k)){
-                    if(lista_de_arestas.get(l).getPeso()==0){
-                        conta_ares=conta_ares+1;
-                    }
-                    aux_ver=aux_ver+1;
-                   // System.out.println(aux_ver);
-                }
-            }
-            if(aux_ver==conta_ares && aux_ver!=0){
-                ver_bloqueados.add(this.vertices.get(k));
-                 for(int q=0; q<lista_de_arestas.size();q++){
-                    if(ver_bloqueados.contains(lista_de_arestas.get(q).getDestino())==true){
-                        ares_bloqueados.add(lista_de_arestas.get(q));
-                     }
-                }
-            }
-        }
-         
-
+ 
     
-    }   System.out.println("O FLUXO MAXIMO DE "+((Cidade) origem.getValor()).getNome()+" até "+((Cidade) destino.getValor()).getNome()+" É "+ fmax);
-           
+    public void fluxo_maximo(Vertice origem, Vertice destino){
+        ArrayList<ArrayList<Aresta>> caminhos_possiveis= new ArrayList<ArrayList<Aresta>>();
+        ArrayList<ArrayList<Aresta>> caminhos_totais= lista_de_caminhos(origem);
+        float fluxo_maximo=0;
+        for(int i =0;i<caminhos_totais.size();i++){
+            if (caminhos_totais.get(i).size()!=0){    
+            if (caminhos_totais.get(i).get(0).getOrigem()==origem && 
+            caminhos_totais.get(i).get(caminhos_totais.get(i).size()-1).getDestino()==destino){
+                caminhos_possiveis.add(caminhos_totais.get(i));
+            }}
+        } 
+
+        for (int j=0; j<caminhos_possiveis.size();j++){// lista de caminhos 
+            Boolean atualizar=true;
+            float fluxo_atual=0;
+           for(int k=0; k<caminhos_possiveis.get(j).size();k++){//percorendo o próximo caminho
+            if (fluxo_atual==0 || (caminhos_possiveis.get(j).get(k)).getPeso()<fluxo_atual){ fluxo_atual= (caminhos_possiveis.get(j).get(k)).getPeso();}
+            if ((caminhos_possiveis.get(j).get(k)).getPeso()==0){ atualizar=false;}
+           }
+           if (atualizar){ fluxo_maximo=fluxo_maximo+fluxo_atual;
+                for(int k=0; k<caminhos_possiveis.get(j).size();k++){// att fluxo das arestas
+                    caminhos_possiveis.get(j).get(k).setPeso(
+                    caminhos_possiveis.get(j).get(k).getPeso()-fluxo_atual);}
+            }
+        }
+        System.out.println("Fluxo Máximo: "+fluxo_maximo);
     }
-    }
+
+}
+
+ 
+    
  
 
